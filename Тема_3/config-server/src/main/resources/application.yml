@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+server:
+  port: 8886
+---
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        native:
+          search-locations: /home/ivan/spring-cloud-course/ms-config-properties/{application}/{profile}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

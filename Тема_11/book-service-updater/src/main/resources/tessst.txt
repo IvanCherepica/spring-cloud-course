@@ -1,0 +1,49 @@
+#
+#spring:
+#  profiles:
+#    active: test
+#  config:
+#    import: optional:configserver:http://localhost:8886
+#  application:
+#    name: book-service
+#  cloud:
+#    config:
+##      import-check:
+##        enabled: false
+#      discovery:
+#        enabled: true
+#        service-id: config-server
+##  data:
+##    mongodb:
+##      uri: mongodb://localhost:27017/gallerydb
+#
+#server:
+#  port: 8081
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+#  instance:
+#    preferIpAddress: true
+#
+##
+##spring:
+## cloud:
+##  config:
+##   import: optional:configserver:http://localhost:8886
+##   discovery:
+##    enabled: true
+##    service-id: config-server
+## application:
+##  name: book-service
+##
+##server:
+## port: 8081
+##
+##eureka:
+## client:
+##  serviceUrl:
+##   defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+## instance:
+##  preferIpAddress: true

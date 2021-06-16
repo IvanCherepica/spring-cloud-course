@@ -1,0 +1,16 @@
+
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          auto-add-partitions: true
+      bindings:
+        input:
+          destination: storeServiceDestination
+          group: storeServiceGroup
+          binder: kafka
+
+server:
+  port: 8052

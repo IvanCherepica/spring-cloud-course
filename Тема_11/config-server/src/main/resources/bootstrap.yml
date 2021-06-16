@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ${KAFKA_ADDR:http://localhost:9092}
+    bus:
+      enabled: true
+      id: config-server
+server:
+  port: 8886
+---
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        native:
+          search-locations: /home/ivan/spring-cloud-course/ms-config-properties/{application}/{profile}
+
+---
+spring:
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/IvanCherepica/ms-config-properties
+          search-paths:
+            - "/{application}/{profile}"
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

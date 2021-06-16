@@ -1,0 +1,79 @@
+#spring:
+#  application:
+#    name: eureka-server
+#
+#server:
+#  port: ${PORT:8761}
+#
+#eureka:
+##  shouldUseDns: false
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: false
+#    eureka-server-connect-timeout-seconds: 60
+#    eureka-service-url-poll-interval-seconds: 15
+#    prefer-same-zone-eureka: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#    healthcheck:
+#      enabled: true
+#    use-dns-for-fetching-service-urls: false
+#  server:
+#    expected-client-Renewal-interval-seconds: 20
+#  instance:
+#    hostname: my-eureka-server.com
+#    lease-expiration-duration-in-seconds: 70
+
+spring:
+  profiles: default
+  application:
+    name: eureka-server
+
+server:
+  port: ${PORT:8761}
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    instance-info-replication-interval-seconds: 10
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    eviction-interval-timer-in-ms: 50000
+    wait-time-in-ms-when-sync-empty: 5
+  instance:
+    hostname: eureka-server.com
+
+---
+spring:
+  profiles: australia
+  application:
+    name: eureka-server-clustered
+server:
+  port: 9001
+eureka:
+  instance:
+    hostname: eureka-server-au.com
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-server-en.com:9002/eureka/
+
+---
+
+spring:
+  profiles: england
+  application:
+    name: eureka-server-clustered
+server:
+  port: 9002
+eureka:
+  instance:
+    hostname: eureka-server-en.com
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-server-au.com:9001/eureka/
